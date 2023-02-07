@@ -1,6 +1,7 @@
 package com.curler.os.domains;
 
 import com.curler.os.domains.enuns.Prioridade;
+import com.curler.os.domains.enuns.Status;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -39,15 +40,15 @@ public class OS {
         
         this.setDataAbertura(LocalDateTime.now());
         this.setPrioridade(Prioridade.BAIXA);
-    
+        this.setStatus(Status.ABERTO);
     }
 
-    public OS(Integer id, Prioridade prioridade, String observacoes, Integer status, Tecnico tecnico, Cliente cliente) {
+    public OS(Integer id, Prioridade prioridade, String observacoes, Status status, Tecnico tecnico, Cliente cliente) {
         this.id = id;
         this.setDataAbertura(LocalDateTime.now());
         this.prioridade = (prioridade == null)? 0 : prioridade.getCode();
         this.observacoes = observacoes;
-        this.status = status;
+        this.status = (status == null)? 0 : status.getCode();
         this.tecnico = tecnico;
         this.cliente = cliente;
     }
@@ -98,8 +99,8 @@ public class OS {
         return status;
     }
 
-    public void setStatus(Integer status) {
-        this.status = status;
+    public void setStatus(Status status) {
+        this.status = status.getCode();
     }
 
     public Tecnico getTecnico() {
@@ -167,8 +168,5 @@ public class OS {
         }
         return Objects.equals(this.cliente, other.cliente);
     }
-    
-    
-    
-    
+      
 }
