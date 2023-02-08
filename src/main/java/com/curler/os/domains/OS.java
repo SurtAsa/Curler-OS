@@ -9,6 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 
 
@@ -31,8 +33,12 @@ public class OS {
     
     private Integer status;
     
+    @ManyToOne
+    @JoinColumn(name = "tecnico_id")
     private Tecnico tecnico;
     
+    @ManyToOne
+    @JoinColumn(name = "cliente_id")
     private Cliente cliente;
 
     public OS() {
