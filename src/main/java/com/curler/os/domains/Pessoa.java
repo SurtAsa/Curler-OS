@@ -72,10 +72,8 @@ public abstract class Pessoa implements Serializable {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 71 * hash + Objects.hashCode(this.id);
-        hash = 71 * hash + Objects.hashCode(this.nome);
-        hash = 71 * hash + Objects.hashCode(this.cpf);
-        hash = 71 * hash + Objects.hashCode(this.telefone);
+        hash = 41 * hash + Objects.hashCode(this.id);
+        hash = 41 * hash + Objects.hashCode(this.cpf);
         return hash;
     }
 
@@ -91,17 +89,13 @@ public abstract class Pessoa implements Serializable {
             return false;
         }
         final Pessoa other = (Pessoa) obj;
-        if (!Objects.equals(this.nome, other.nome)) {
-            return false;
-        }
         if (!Objects.equals(this.cpf, other.cpf)) {
-            return false;
-        }
-        if (!Objects.equals(this.telefone, other.telefone)) {
             return false;
         }
         return Objects.equals(this.id, other.id);
     }
+
+    
     
     
 }

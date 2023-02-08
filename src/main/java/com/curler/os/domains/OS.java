@@ -79,8 +79,8 @@ public class OS {
         this.dataFechamento = dataFechamento;
     }
 
-    public Integer getPrioridade() {
-        return prioridade;
+    public Prioridade getPrioridade() {
+        return Prioridade.toEnum(this.prioridade);
     }
 
     public void setPrioridade(Prioridade prioridade) {
@@ -95,8 +95,8 @@ public class OS {
         this.observacoes = observacoes;
     }
 
-    public Integer getStatus() {
-        return status;
+    public Status getStatus() {
+        return Status.toEnum(this.status);
     }
 
     public void setStatus(Status status) {
@@ -121,15 +121,8 @@ public class OS {
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 61 * hash + Objects.hashCode(this.id);
-        hash = 61 * hash + Objects.hashCode(this.dataAbertura);
-        hash = 61 * hash + Objects.hashCode(this.dataFechamento);
-        hash = 61 * hash + Objects.hashCode(this.prioridade);
-        hash = 61 * hash + Objects.hashCode(this.observacoes);
-        hash = 61 * hash + Objects.hashCode(this.status);
-        hash = 61 * hash + Objects.hashCode(this.tecnico);
-        hash = 61 * hash + Objects.hashCode(this.cliente);
+        int hash = 5;
+        hash = 71 * hash + Objects.hashCode(this.id);
         return hash;
     }
 
@@ -145,28 +138,6 @@ public class OS {
             return false;
         }
         final OS other = (OS) obj;
-        if (!Objects.equals(this.observacoes, other.observacoes)) {
-            return false;
-        }
-        if (!Objects.equals(this.id, other.id)) {
-            return false;
-        }
-        if (!Objects.equals(this.dataAbertura, other.dataAbertura)) {
-            return false;
-        }
-        if (!Objects.equals(this.dataFechamento, other.dataFechamento)) {
-            return false;
-        }
-        if (!Objects.equals(this.prioridade, other.prioridade)) {
-            return false;
-        }
-        if (!Objects.equals(this.status, other.status)) {
-            return false;
-        }
-        if (!Objects.equals(this.tecnico, other.tecnico)) {
-            return false;
-        }
-        return Objects.equals(this.cliente, other.cliente);
-    }
-      
+        return Objects.equals(this.id, other.id);
+    } 
 }
