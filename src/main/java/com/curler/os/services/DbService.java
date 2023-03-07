@@ -23,9 +23,9 @@ public class DbService {
     @Autowired
     private TecnicoRepository tecnicoRepository;
     
-    public void instanceDb(){
-        Cliente c1 = new Cliente(null,"Jose", "123456789", "12356789");
-        Tecnico t1 = new Tecnico(null, "Joao", "01156789", "123456789");
+    public void instanciaDb(){
+        Cliente c1 = new Cliente(null,"Jose", "73516681080", "12356789");
+        Tecnico t1 = new Tecnico(null, "Joao", "18965633842", "123456789");
         OS os1 = new OS(null, Prioridade.BAIXA, "teste observacao", Status.ABERTO, t1, c1);
         
         t1.getList().add(os1);
