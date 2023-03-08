@@ -13,7 +13,7 @@ public class TestConfig {
     private DbService dbService;
     
     @Bean
-    public void intanceDb(){
-        this.dbService.instanceDb();
+    public void intanciaDb(){
+        this.dbService.instanciaDb();
     }
 }
