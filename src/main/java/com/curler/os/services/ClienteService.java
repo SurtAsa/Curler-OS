@@ -49,7 +49,7 @@ public class ClienteService {
         
     }
     
-    public Cliente putCliente(Integer id,@Valid ClienteDTO clienteNovo){
+    public Cliente putCliente(Integer id, @Valid ClienteDTO clienteNovo){
     
         Cliente clienteAntigo = getClienteById(id);
         
