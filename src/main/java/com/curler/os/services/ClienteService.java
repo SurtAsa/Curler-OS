@@ -4,6 +4,7 @@ package com.curler.os.services;
 import com.curler.os.domains.Cliente;
 import com.curler.os.dtos.ClienteDTO;
 import com.curler.os.repositories.ClienteRepository;
+import com.curler.os.services.exceptions.ObjectNotFoundException;
 import java.util.List;
 import java.util.Optional;
 import javax.validation.Valid;
@@ -32,7 +33,8 @@ public class ClienteService {
       
         Optional<Cliente> cliente = repository.findById(id);
         
-        return cliente.orElseThrow();
+        return cliente.orElseThrow(()-> new ObjectNotFoundException
+        ("Objeto não encontrado! ID: " + id + ", tipo: " + Cliente.class.getName()));
     }
     
     public void deleteCliente(Integer id){
