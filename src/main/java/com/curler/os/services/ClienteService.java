@@ -2,13 +2,19 @@
 package com.curler.os.services;
 
 import com.curler.os.domains.Cliente;
+import com.curler.os.domains.Pessoa;
 import com.curler.os.dtos.ClienteDTO;
 import com.curler.os.repositories.ClienteRepository;
+import com.curler.os.repositories.PessoaRepository;
+import com.curler.os.services.exceptions.DataIntegrityViolationException;
 import com.curler.os.services.exceptions.ObjectNotFoundException;
 import java.util.List;
 import java.util.Optional;
 import javax.validation.Valid;
+import javax.validation.constraints.Null;
+
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 
 @Service
@@ -16,9 +22,16 @@ public class ClienteService {
     
     @Autowired
     private ClienteRepository repository;
+
+    @Autowired
+    private PessoaRepository pessoaRepository;
     
     public Cliente createCliente(ClienteDTO clienteDTO){
-    
+
+        if(findByCPF(clienteDTO) != null){
+            throw new DataIntegrityViolationException("CPF já cadastrado na base de dados!");
+        }
+
         return repository.save(new Cliente(null, clienteDTO.getNome(), clienteDTO.getCpf(), clienteDTO.getTelefone()));
         
     }
@@ -61,5 +74,15 @@ public class ClienteService {
         
         return repository.save(clienteAntigo); 
         
+    }
+
+    private Pessoa findByCPF(ClienteDTO objDTO){
+
+        Pessoa pessoa = pessoaRepository.findByCPF(objDTO.getCpf());
+        if(pessoa != null){
+            return pessoa;
+        }
+
+        return null;
     }
 }
