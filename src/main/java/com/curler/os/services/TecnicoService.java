@@ -1,12 +1,15 @@
 package com.curler.os.services;
 
+import com.curler.os.domains.Pessoa;
 import com.curler.os.domains.Tecnico;
 import com.curler.os.dtos.TecnicoDTO;
+import com.curler.os.repositories.PessoaRepository;
 import com.curler.os.repositories.TecnicoRepository;
 import java.util.List;
 import java.util.Optional;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import com.curler.os.services.exceptions.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -14,9 +17,16 @@ public class TecnicoService {
     
     @Autowired
     private TecnicoRepository repository;
+
+    @Autowired
+    private PessoaRepository pessoaRepository;
     
     public Tecnico createTecnico(TecnicoDTO tecnicoDTO){
-    
+
+        if(findByCPF(tecnicoDTO) != null){
+            throw new DataIntegrityViolationException("CPF já cadastrado na base de dados!");
+        }
+
         return repository.save(new Tecnico(null, tecnicoDTO.getNome(), tecnicoDTO.getCpf(), tecnicoDTO.getTelefone()));
         
     }
@@ -53,6 +63,16 @@ public class TecnicoService {
         
         return repository.save(tecnicoAntigo);
     
+    }
+
+    private Pessoa findByCPF(TecnicoDTO objDTO){
+
+        Pessoa pessoa = pessoaRepository.findByCPF(objDTO.getCpf());
+        if(pessoa != null){
+            return pessoa;
+        }
+
+        return null;
     }
     
 }
